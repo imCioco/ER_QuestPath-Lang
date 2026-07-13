@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Validate QuestPath translation files against english.json.
+"""Validate QuestPath translation files against lang/english.json.
 
 Usage:
-  python validate.py english.json german.json   # validate one file
-  python validate.py                             # validate every *.json
-                                                   # in this folder against
-                                                   # english.json
+  python validate.py lang/english.json lang/german.json   # validate one file
+  python validate.py                                       # validate every
+                                                             # *.json in lang/
+                                                             # against
+                                                             # lang/english.json
 
 Checks:
   - JSON parses                                          -> error
@@ -93,12 +94,13 @@ def main():
             print("usage: validate.py english.json <translation.json> [more.json ...]")
             sys.exit(2)
     else:
-        english_path = root / "english.json"
+        lang_dir = root / "lang"
+        english_path = lang_dir / "english.json"
         targets = sorted(
-            p for p in root.glob("*.json") if p.name != "english.json"
+            p for p in lang_dir.glob("*.json") if p.name != "english.json"
         )
         if not targets:
-            print("No translation files found next to english.json.")
+            print("No translation files found in lang/ next to english.json.")
             sys.exit(0)
 
     english, err = load_json(english_path)

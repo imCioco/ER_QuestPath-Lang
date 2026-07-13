@@ -3,7 +3,7 @@ name: Validate translations
 on:
   pull_request:
     paths:
-      - "*.json"
+      - "lang/*.json"
 
 jobs:
   validate:
